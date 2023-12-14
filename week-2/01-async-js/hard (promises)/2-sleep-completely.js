@@ -3,20 +3,15 @@
  * During this time the thread should not be able to do anything else.
  */
 
-function sleep(seconds) {
+function sleep(miliseconds) {
   const p = new Promise((resolve) => {
     setTimeout(() => {
-      console.log(`Resolved after ${seconds} seconds`);
+      console.log(`resolves after ${miliseconds * 1000} seconds`);
       resolve();
-    }, seconds * 1000);
+    }, miliseconds);
   });
 
   return p;
 }
 
-console.log("Start");
-
-sleep(3).then(() => {
-  console.log("End");
-}); console.log(`Resolved after ${milliseconds} milliseconds`);
-resolve();
+module.exports = sleep;

@@ -13,6 +13,4 @@ function wait(n) {
   return p;
 }
 
-wait(3).then(() => {
-  console.log("Promise Resolved");
-});
+module.exports = wait;

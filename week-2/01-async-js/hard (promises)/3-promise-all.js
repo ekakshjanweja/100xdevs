@@ -4,51 +4,42 @@
  * Print how long it took for all 3 promises to resolve.
  */
 
-function waitOneSecond() {
+function waitOneSecond(n) {
   const p = new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Resolved waitOneSecond()");
-      resolve();
-    }, 1000);
+    setTimeout(resolve, n * 1000);
   });
 
   return p;
 }
 
-function waitTwoSecond() {
+function waitTwoSecond(n) {
   const p = new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Resolved waitTwoSecond()");
-      resolve();
-    }, 2000);
+    setTimeout(resolve, n * 1000);
   });
 
   return p;
 }
 
-function waitThreeSecond() {
+function waitThreeSecond(n) {
   const p = new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Resolved waitThreeSecond()");
-      resolve();
-    }, 3000);
+    setTimeout(resolve, n * 1000);
   });
 
   return p;
 }
 
-function calculateTime() {
+function calculateTime(n1, n2, n3) {
   const startTime = Date.now();
 
-  Promise.all([waitOneSecond(), waitTwoSecond(), waitThreeSecond()]).then(
-    () => {
-      const endTime = Date.now();
-      const timeDiff = endTime - startTime;
-      console.log(
-        "All promises were resolved in " + timeDiff + " milliseconds"
-      );
-    }
-  );
+  return Promise.all([
+    waitOneSecond(n1),
+    waitTwoSecond(n2),
+    waitThreeSecond(n3),
+  ]).then(() => {
+    const endTime = Date.now();
+    const timeDiff = endTime - startTime;
+    return timeDiff;
+  });
 }
 
-calculateTime();
+module.exports = calculateTime;
