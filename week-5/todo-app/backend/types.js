@@ -9,7 +9,7 @@ const updatedTodoSchema = zod.object({
   id: zod.string(),
 });
 
-mondule.exports = {
+module.exports = {
   todoSchema: todoSchema,
   updatedTodoSchema: updatedTodoSchema,
 };

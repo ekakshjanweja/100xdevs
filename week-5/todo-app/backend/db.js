@@ -3,16 +3,18 @@ const { boolean } = require("zod");
 
 // mongodb+srv://admin:ekaksh31@cluster0.rw0dfnm.mongodb.net/
 
-mongoose.connect("mongodb+srv://admin:ekaksh31@cluster0.rw0dfnm.mongodb.net/");
+mongoose.connect(
+  "mongodb+srv://admin:ekaksh31@cluster0.rw0dfnm.mongodb.net/?retryWrites=true&w=majority"
+);
 
-const todoSchema = new mongoose.Schema({
+const todoSchema = mongoose.Schema({
   title: String,
   description: String,
-  completed: boolean,
+  completed: Boolean,
 });
 
 const todo = mongoose.model("todos", todoSchema);
 
-mondule.exports = {
+module.exports = {
   todo,
 };
