@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { todoSchema, updatedTodoSchema } = require("./types");
 const { todo } = require("./db");
 
 const app = express();
+app.use(cors());
 
 const PORT = 3000;
 
