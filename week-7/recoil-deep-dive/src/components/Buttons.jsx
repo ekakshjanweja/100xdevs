@@ -1,28 +1,10 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import networkAtom from "../atoms/NetworkAtom";
-import jobsAtom from "../atoms/JobsAtom";
-import messagingAtom from "../atoms/MessagingAtom";
-import notificationsAtom from "../atoms/NotificationsAtom";
+import { useRecoilValue } from "recoil";
 import totalNotificationSelector from "../atoms/TotalNotificationSelector";
-import { useEffect } from "react";
-import axios from "axios";
+import notificationsAtom from "../atoms/NotificationsAtom";
 
 function Buttons() {
-  const [networkCount, setNetworkCount] = useRecoilState(networkAtom);
-  const [jobCount, setJobCount] = useRecoilState(jobsAtom);
-  const [messagingCount, setMessagingCount] = useRecoilState(messagingAtom);
-  const [notificationCount, setNotificationCount] =
-    useRecoilState(notificationsAtom);
+  const notificationCount = useRecoilValue(notificationsAtom);
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
-
-  useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/notifications").then((res) => {
-      setNetworkCount(res.data.network);
-      setJobCount(res.data.jobs);
-      setMessagingCount(res.data.messaging);
-      setNotificationCount(res.data.notifications);
-    });
-  }, []);
 
   return (
     <>
@@ -32,16 +14,17 @@ function Buttons() {
       <div>
         <button style={{ margin: 20 }}>Home</button>
         <button style={{ margin: 20 }}>
-          My Network - {networkCount >= 100 ? "99+" : networkCount}
+          My Network -
+          {notificationCount.networks >= 100
+            ? "99+"
+            : notificationCount.networks}
+        </button>
+        <button style={{ margin: 20 }}>Jobs - {notificationCount.jobs}</button>
+        <button style={{ margin: 20 }}>
+          Messaging - {notificationCount.messaging}
         </button>
         <button style={{ margin: 20 }}>
-          Jobs - {jobCount >= 100 ? "99+" : jobCount}
-        </button>
-        <button style={{ margin: 20 }}>
-          Messaging - {messagingCount >= 100 ? "99+" : messagingCount}
-        </button>
-        <button style={{ margin: 20 }}>
-          Notifications - {notificationCount >= 100 ? "99+" : notificationCount}
+          Notifications - {notificationCount.notifications}
         </button>
         <button style={{ margin: 20 }}>Me </button>
       </div>
